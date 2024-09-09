@@ -7,16 +7,19 @@ const cors = require('cors')
 const app = express();
 
 app.use(cors())
+
+//lectura y parseo del body
+
+app.use(express.json())
 dbConnection()
-
 // rutas
-app.get('/',  (req, res) => {
-    res.json({
-        ok: true,
-        msg: 'Hola Mundo'
-    })
+app.use('/api/usuarios', require('./routes/usuarios'))
+app.use('/api/login', require('./routes/auth'))
 
-});
+
+
+
+
 
 app.listen(process.env.PORT, ()=> {
     console.log('servidor corriendo puerto 3002');
